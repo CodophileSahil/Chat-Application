@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
-    path: "/signup",
+    path: "/register",
     element: <Signup />,
   },
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <div className="text-red-200">Hi there</div>
+      <RouterProvider router={router} />
     </>
   );
 }
