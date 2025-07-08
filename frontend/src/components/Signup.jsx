@@ -9,7 +9,18 @@ const Signup = () => {
     confirmPassword: "",
     gender: "",
   });
-  const navigate = useNavigate();
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(user);
+    setUser({
+      fullName: "",
+      username: "",
+      password: "",
+      confirmPassword: "",
+      gender: "",
+    });
+  };
+
   const handleCheckbox = (gender) => {
     setUser({ ...user, gender });
   };
@@ -18,13 +29,14 @@ const Signup = () => {
     <div className="min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding">
         <h1 className="text-3xl font-bold text-center">Signup</h1>
-        <form>
+        <form onSubmit={onSubmitHandler}>
           <div>
             <label className="label p-2">
               <span className="text-base label-text">Full Name</span>
             </label>
             <input
               value={user.fullName}
+              onChange={(e) => setUser({ ...user, fullName: e.target.value })}
               className="w-full input input-bordered h-10"
               type="text"
               placeholder="Full Name"
@@ -36,6 +48,7 @@ const Signup = () => {
             </label>
             <input
               value={user.username}
+              onChange={(e) => setUser({ ...user, username: e.target.value })}
               className="w-full input input-bordered h-10"
               type="text"
               placeholder="Username"
@@ -47,6 +60,7 @@ const Signup = () => {
             </label>
             <input
               value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
               className="w-full input input-bordered h-10"
               type="password"
               placeholder="Password"
@@ -58,6 +72,9 @@ const Signup = () => {
             </label>
             <input
               value={user.confirmPassword}
+              onChange={(e) =>
+                setUser({ ...user, confirmPassword: e.target.value })
+              }
               className="w-full input input-bordered h-10"
               type="password"
               placeholder="Confirm Password"
@@ -68,8 +85,8 @@ const Signup = () => {
               <p>Male</p>
               <input
                 checked={user.gender === "male"}
+                onChange={() => handleCheckbox("male")}
                 type="checkbox"
-                defaultChecked
                 className="checkbox mx-2"
               />
             </div>
@@ -77,8 +94,8 @@ const Signup = () => {
               <p>Female</p>
               <input
                 checked={user.gender === "female"}
+                onChange={() => handleCheckbox("female")}
                 type="checkbox"
-                defaultChecked
                 className="checkbox mx-2"
               />
             </div>
@@ -87,7 +104,10 @@ const Signup = () => {
             Already have an account?<Link to="/login">login</Link>{" "}
           </p>
           <div>
-            <button className="btn btn-block btn-sm mt-2 border border-slate-700">
+            <button
+              type="submit"
+              className="btn btn-block btn-sm mt-2 border border-slate-700"
+            >
               Signup
             </button>
           </div>
